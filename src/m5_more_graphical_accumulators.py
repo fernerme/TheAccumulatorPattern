@@ -338,8 +338,38 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
       :type n: int
       :type window: rg.RoseWindow
       """
+    rectangle1.attach_to(window)
+    rectangle2.attach_to(window)
+
+    center1 = rectangle1.get_center()
+    center2 = rectangle2.get_center()
+    llc1 = rectangle1.get_lower_left_corner()
+    x0 = center1.x
+    y0 = center1.y
+    xf = center2.x
+    yf = center2.y
+    x_dec = x0 - llc1.x
+    y_dec = y0 - llc1.y
+
+    for k in range(n):
+        start = rg.Point(x0, y0)
+        end = rg.Point(xf, yf)
+        line = rg.Line(start, end)
+        line.thickness = 5
+        if k % 2 == 0:
+            line.color = rectangle1.outline_color
+        else:
+            line.color = rectangle2.outline_color
+        line.attach_to(window)
+        x0 = x0 - x_dec
+        y0 = y0 - y_dec
+        xf = xf - x_dec
+        yf = yf - y_dec
+
+    window.render()
+
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # CONSIDER using the ACCUMULATOR IN GRAPHICS pattern,
