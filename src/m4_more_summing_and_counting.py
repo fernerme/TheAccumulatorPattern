@@ -267,16 +267,17 @@ def run_test_count_cosines_from():
     print('       actual:  ', answer)
 
     # Test 5:
-    expected = 2
+    expected = 3
     answer = count_cosines_from(0, 5, 0)
     print('Test 5 expected:', expected)
     print('       actual:  ', answer)
 
     # Test 6:
-    expected = 4
+    expected = 3
     answer = count_cosines_from(5, 9, -0.1)
     print('Test 6 expected:', expected)
     print('       actual:  ', answer)
+
 
 def count_cosines_from(m, n, x):
     """
@@ -297,8 +298,15 @@ def count_cosines_from(m, n, x):
       -- count_cosines_from(3, 9, 0.27)  returns  3
       -- count_cosines_from(4, 8, -0.5)  returns  4
     """
+    total = 0
+    for k in range((n-m)+1):
+        if math.cos(m+k) >= x:
+            total = total + 1
+        else:
+            pass
+    return total
     # ------------------------------------------------------------------
-    # TODO: 7. Implement and test this function.
+    # DONE: 7. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPORTANT: As in previous problems in this session,
